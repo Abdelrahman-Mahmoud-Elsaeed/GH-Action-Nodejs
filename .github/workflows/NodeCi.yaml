@@ -12,7 +12,7 @@ jobs:
     unit-tests:
         strategy:
             matrix:
-                node-version: [14.x, 22.x]
+                node-version: [22.x]
                 os: [ubuntu-latest, windows-latest, macos-latest]
                 exclude:
                     - node-version: 14.x
