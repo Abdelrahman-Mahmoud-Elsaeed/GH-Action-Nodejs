@@ -32,7 +32,7 @@ jobs:
               run: npm test
             
             - name: Set env variable for port linux 
-              if: runner.os == 'ubuntu' || runner.os == 'macos'
+              if: runner.os == 'Ubuntu' || runner.os == 'macOS'
               run: export PORT=${{ env.PORT }}
             - name: Set env variable for port windows
               if: runner.os == 'windows'
