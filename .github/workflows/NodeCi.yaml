@@ -30,9 +30,12 @@ jobs:
               run: npm install
             - name: Run tests
               run: npm test
+            
             - name: Set env variable for port linux 
+              if: runner.os == 'ubuntu' || runner.os == 'macos'
               run: export PORT=${{ env.PORT }}
             - name: Set env variable for port windows
+              if: runner.os == 'windows'
               run: Set-Variable -Name port -Value ${{ env.PORT }}
     Coverage:
         runs-on: ubuntu-latest
