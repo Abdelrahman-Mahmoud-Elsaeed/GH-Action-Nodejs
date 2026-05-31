@@ -1,0 +1,43 @@
+name: nodejs-ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    unit-tests:
+        strategy:
+            matrix:
+                node-version: [14.x, 16.x, 18.x]
+                os: [ubuntu-latest, windows-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                node-version: '${{ matrix.node-version }}'
+            - name: Install dependencies
+              run: npm install
+            - name: Run tests
+              run: npm test
+    Coverage:
+        needs: unit-tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js 18.x
+              uses: actions/setup-node@v2
+              with:
+                node-version: '18.x'
+            - name: Install dependencies
+              run: npm install
+            - name: Run tests with coverage
+              run: npm run coverage
+            - name: Upload coverage Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: coverage-report
+                path: coverage/
+              
