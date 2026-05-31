@@ -55,9 +55,6 @@ jobs:
               with:
                 path: ~/node_modules
                 key: ${{ runner.os }}-node-22.x-npm-${{ hashFiles('package.json') }}
-                restore-keys: |
-                  ${{ runner.os }}-node-22.x-npm-
-                  ${{ runner.os }}-node-
             - name: Install dependencies
               run: npm install
             - name: Run tests with coverage
