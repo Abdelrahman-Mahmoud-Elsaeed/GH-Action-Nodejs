@@ -29,8 +29,8 @@ jobs:
             - name: Cache npm dependencies
               uses: actions/cache@v4
               with:
-                path: ~/node_modules
-                key: ${{ runner.os }}-node-${{ matrix.node-version }}-npm-${{ hashFiles('package.json') }}
+                path: node_modules
+                key: ${{ runner.os }}-node-${{ matrix.node-version }}-npm-${{ hashFiles('package-lock.json') }}
             - name: Install dependencies
               run: npm install
             - name: Run tests
@@ -53,8 +53,8 @@ jobs:
             - name: Cache npm dependencies
               uses: actions/cache@v4
               with:
-                path: ~/node_modules
-                key: ${{ runner.os }}-node-22.x-npm-${{ hashFiles('package.json') }}
+                path: node_modules
+                key: ${{ runner.os }}-node-22.x-npm-${{ hashFiles('package-lock.json') }}
             - name: Install dependencies
               run: npm install
             - name: Run tests with coverage
