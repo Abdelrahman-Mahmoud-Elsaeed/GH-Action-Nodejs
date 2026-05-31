@@ -49,8 +49,9 @@ jobs:
               run: npm install
             - name: Run tests with coverage
               run: npm run coverage
-              continue-on-error: true
+            #   continue-on-error: true
             - name: Upload coverage Artifact
+              if: always() # Ensure this step runs even if previous steps fail
               uses: actions/upload-artifact@v7
               with:
                 name: coverage-report
