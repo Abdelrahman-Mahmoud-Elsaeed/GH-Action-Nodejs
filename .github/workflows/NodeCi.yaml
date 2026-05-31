@@ -9,7 +9,7 @@ jobs:
     unit-tests:
         strategy:
             matrix:
-                node-version: [22.x,24.x]
+                node-version: [18.x, 22.x, 24.x]
                 os: [ubuntu-latest, windows-latest, macos-latest]
         runs-on: ${{ matrix.os }}
         steps:
@@ -23,7 +23,6 @@ jobs:
             - name: Run tests
               run: npm test
     Coverage:
-        needs: unit-tests
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
