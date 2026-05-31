@@ -80,6 +80,7 @@ jobs:
                 load: true
                 tags: ${{ vars.DOCKER_HUB_USERNAME }}/my-node-app:latest
             - name: Docker Test
+              timeout-minutes: 3
               run: |
                 docker run --rm -d -p ${{ env.PORT }}:${{ env.PORT }} -e PORT=${{ env.PORT }} --name my-node-app ${{ vars.DOCKER_HUB_USERNAME }}/my-node-app:latest 
                 sleep 10
@@ -105,7 +106,7 @@ jobs:
                 echo '```' >> $GITHUB_STEP_SUMMARY
                 cat trivy-report.txt >> $GITHUB_STEP_SUMMARY
                 echo '```' >> $GITHUB_STEP_SUMMARY
-                
+
             - name: Log in to Docker Hub
               uses: docker/login-action@v2
               with:
