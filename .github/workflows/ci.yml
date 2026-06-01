@@ -63,6 +63,16 @@ jobs:
           context: .
           push: false
           tags: ${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: 'docker.io/${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
       - name: test docker container
         run: |
           docker container run --name test-container -d -p 3200:3000 ${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}
@@ -83,4 +93,4 @@ jobs:
         with:
           context: .
           push: true
-          tag: ${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}
+          tags: ${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}
