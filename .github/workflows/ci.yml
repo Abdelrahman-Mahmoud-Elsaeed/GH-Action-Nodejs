@@ -67,7 +67,7 @@ jobs:
         run: |
           docker container run --name test-container -d -p 3200:3000 ${{ vars.DOKER_HUB_USERNAME }}/digilians-nodejs:${{ github.sha }}
           sleep 10
-          crul http://localhost:3200
+          curl http://localhost:3200
           echo $?
           docker container stop test-container
 
