@@ -34,6 +34,8 @@ jobs:
   code-coverage:
     runs-on: ubuntu-latest
     steps:
+      - name: clone repo
+        uses: actions/checkout@v6
       - name: Install Node JS
         uses: actions/setup-node@v6
         with:
